@@ -67,7 +67,9 @@ tian_html/
         ├── visual-red.jpg   # 红色视觉锚点
         ├── visual-office.jpg# 冷调办公空间
         ├── visual-crowd.jpg # 人群与压迫
-        └── footer-visual.jpg# 尾页视觉图
+        ├── footer-visual.jpg# 尾页视觉图
+        ├── cam-01-apartment.jpg # CAM 01 周放住宅走廊监控
+        └── cam-07-alley.jpg     # CAM 07 案发后巷暴雨暗道监控
 ```
 
 ---

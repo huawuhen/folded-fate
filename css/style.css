@@ -1561,16 +1561,29 @@ a {
 }
 
 .feed-screen {
-  height: 220px;
+  height: 280px;
   background: #040608;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--radius-md);
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
   margin-bottom: 14px;
+}
+
+.feed-screen-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: contrast(1.15) brightness(0.92);
+  z-index: 1;
+  transition: transform 0.6s ease;
+}
+
+.feed-screen:hover .feed-screen-bg {
+  transform: scale(1.03);
 }
 
 .scanlines {
@@ -1580,41 +1593,83 @@ a {
               linear-gradient(90deg, rgba(255,0,0,0.06), rgba(0,255,0,0.02), rgba(0,0,255,0.06));
   background-size: 100% 4px, 6px 100%;
   pointer-events: none;
+  z-index: 2;
+}
+
+.feed-person-box {
+  position: absolute;
+  z-index: 3;
+}
+
+.feed-person-box.pos-cam1 {
+  bottom: 15px;
+  left: 54%;
+  transform: translateX(-50%);
+  width: 125px;
+  height: 175px;
+}
+
+.feed-person-box.pos-cam7 {
+  bottom: 25px;
+  left: 58%;
+  transform: translateX(-50%);
+  width: 115px;
+  height: 165px;
 }
 
 .target-box {
-  width: 130px;
-  height: 160px;
-  border: 2px dashed rgba(0, 229, 255, 0.8);
+  width: 100%;
+  height: 100%;
+  border: 2px dashed rgba(0, 229, 255, 0.85);
   position: relative;
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding-top: 8px;
-  box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
+  padding-top: 6px;
+  box-shadow: 0 0 16px rgba(0, 229, 255, 0.35);
+  animation: targetPulse 2.5s infinite ease-in-out;
+}
+
+@keyframes targetPulse {
+  0%, 100% { border-color: rgba(0, 229, 255, 0.85); box-shadow: 0 0 16px rgba(0, 229, 255, 0.35); }
+  50% { border-color: rgba(0, 229, 255, 0.45); box-shadow: 0 0 8px rgba(0, 229, 255, 0.15); }
 }
 
 .target-box.alert-target {
   border-color: var(--accent-red);
-  box-shadow: 0 0 15px var(--accent-red-glow);
+  box-shadow: 0 0 16px var(--accent-red-glow);
+  animation: alertTargetPulse 2s infinite ease-in-out;
+}
+
+@keyframes alertTargetPulse {
+  0%, 100% { border-color: rgba(255, 51, 68, 0.9); box-shadow: 0 0 16px var(--accent-red-glow); }
+  50% { border-color: rgba(255, 51, 68, 0.45); box-shadow: 0 0 8px rgba(255, 51, 68, 0.2); }
 }
 
 .target-label {
   font-family: var(--font-mono);
   font-size: 0.65rem;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0, 0, 0, 0.88);
   color: #FFF;
   padding: 2px 6px;
   border-radius: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  white-space: nowrap;
 }
 
 .feed-location {
   position: absolute;
   bottom: 8px;
-  left: 12px;
+  left: 10px;
   font-size: 0.72rem;
-  color: #8C92A6;
+  color: #C0C6D8;
   font-family: var(--font-mono);
+  z-index: 4;
+  background: rgba(4, 6, 8, 0.8);
+  backdrop-filter: blur(4px);
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .feed-desc {
