@@ -567,6 +567,28 @@ a {
   color: #D0D4E4;
 }
 
+.concept-char-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.concept-avatar {
+  width: 58px;
+  height: 58px;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  flex-shrink: 0;
+}
+
+.card-glow-purple:hover {
+  box-shadow: 0 10px 30px rgba(186, 104, 200, 0.35);
+  border-color: rgba(186, 104, 200, 0.5);
+}
+
 .card-glow-red:hover {
   box-shadow: 0 10px 30px var(--accent-red-glow);
   border-color: rgba(255, 51, 68, 0.5);
@@ -1008,6 +1030,31 @@ a {
   margin-bottom: 6px;
 }
 
+.persp-head-with-avatar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.persp-avatar {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent-amber);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+  flex-shrink: 0;
+}
+
+.persp-aming .persp-avatar {
+  border-color: var(--accent-red);
+}
+
+.persp-anran .persp-avatar {
+  border-color: var(--accent-cyan);
+}
+
 .persp-head h3 {
   font-size: 1.45rem;
   margin-bottom: 6px;
@@ -1157,22 +1204,59 @@ a {
   margin-bottom: 14px;
 }
 
-.sm-code-view {
-  background: rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: var(--radius-md);
-  padding: 18px;
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-  color: #D2D8EB;
-  line-height: 1.6;
-  overflow-x: auto;
-  margin-bottom: 12px;
+.sm-visual-flow {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 20px 0 16px;
 }
 
-.sm-code-view .k { color: #82AAFF; }
-.sm-code-view .s { color: #C3E88D; }
-.sm-code-view .n { color: #F78C6C; }
+.flow-node {
+  flex: 1;
+  min-width: 170px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: var(--transition);
+}
+
+.flow-node:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: var(--accent-amber);
+  transform: translateY(-2px);
+}
+
+.fn-icon {
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.fn-title {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #FFF;
+}
+
+.fn-desc {
+  font-size: 0.8rem;
+  color: #9EA3B5;
+  line-height: 1.45;
+}
+
+.flow-arrow {
+  display: flex;
+  align-items: center;
+  color: var(--accent-amber);
+  font-size: 1.3rem;
+  font-weight: bold;
+}
 
 .sm-note {
   font-size: 0.84rem;
@@ -1255,10 +1339,36 @@ a {
   margin-bottom: 24px;
 }
 
+.context-role-box {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.context-char-mini {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent-amber);
+  box-shadow: 0 0 12px var(--accent-amber-glow);
+  flex-shrink: 0;
+}
+
+.context-role-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: #8C92A6;
+  display: block;
+}
+
 .context-role {
-  font-size: 0.88rem;
+  font-size: 0.95rem;
   color: var(--accent-amber);
-  margin-bottom: 6px;
+  margin-top: 2px;
 }
 
 .context-situation {

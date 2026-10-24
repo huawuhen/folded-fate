@@ -1,0 +1,1 @@
+const task = await taskSpace('inspect chars'); const page = task.page('p1'); await page.goto('http://localhost:3000/'); await page.evaluate(() =; await new Promise(r =, 600)); await page.screenshot({ path: 'C:/Users/Administrator/.gemini/antigravity/brain/ee07f87e-1999-4b38-a63d-3bf5ca4085ee/characters-inspect.png' }); await task.finish({ keep: [] }); 

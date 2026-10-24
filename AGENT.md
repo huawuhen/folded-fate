@@ -93,7 +93,8 @@ const CHAPTER_DATA = [
 ## 5. 交互特色与加分功能
 
 1. **演示模式切换（Pitch Deck Mode vs. Scroll Mode）**：
-   - 支持投资人会议演讲时的一屏一页 PPT 翻页模式（支持键盘箭头键 `←` / `→`）。
+   - **Space 快捷键**：全局一键平滑跳回首页（Hero 开篇）。
+- **ArrowRight / ArrowLeft / PageDown / PageUp**：平滑切页或进入全屏演示模式。
    - 同时支持投资人自主手机/电脑浏览的连贯长图滚动模式。
 2. **投资人一键导出/下载（PDF / 商业计划书摘录）**：
    - 优化 `@media print` 样式，方便投资人直接打印或保存为 PDF。

@@ -293,7 +293,24 @@ function initDeckMode() {
     // 忽略输入框或表单输入时的事件
     if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
 
-    if (e.key === 'ArrowRight' || e.key === 'Space' || e.key === 'PageDown') {
+    // Space 键：跳回到首页
+    if (e.key === ' ' || e.code === 'Space') {
+      e.preventDefault();
+      currentIndex = 0;
+      if (isDeckMode) {
+        updateDeckView();
+      } else {
+        const heroEl = document.getElementById('hero');
+        if (heroEl) {
+          heroEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      }
+      return;
+    }
+
+    if (e.key === 'ArrowRight' || e.key === 'PageDown') {
       e.preventDefault();
       if (!isDeckMode) {
         enterDeckMode();
