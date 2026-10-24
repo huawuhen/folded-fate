@@ -497,6 +497,69 @@ a {
 /* ==========================================================================
    01 / Concept Section
    ========================================================================== */
+/* 1024 Update: Concept Summary Strip */
+.concept-summary-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  background: rgba(18, 22, 31, 0.7);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 18px 26px;
+  margin-bottom: 32px;
+}
+
+.cs-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cs-num {
+  font-family: var(--font-mono);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--accent-amber);
+}
+
+.cs-info strong {
+  display: block;
+  font-size: 0.92rem;
+  color: #FFF;
+}
+
+.cs-info span {
+  font-size: 0.8rem;
+  color: #8E94A8;
+}
+
+.cs-divider {
+  width: 1px;
+  height: 36px;
+  background: var(--border-light);
+}
+
+.cs-action-tag {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.cs-tag-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent-red);
+}
+
+.cs-action-tag strong {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  color: var(--accent-amber);
+}
+
 .concept-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -905,6 +968,130 @@ a {
 /* ==========================================================================
    04 / Chapter Map Section
    ========================================================================== */
+/* 1024 Update: Fate Flow Intersection Tracks */
+.fate-flow-card {
+  background: rgba(14, 18, 26, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-xl);
+  padding: 28px;
+  margin-bottom: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.fate-flow-track {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+}
+
+.track-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.track-badge {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: var(--radius-sm);
+}
+
+.badge-zhou {
+  background: rgba(255, 179, 0, 0.15);
+  color: #FFB300;
+  border: 1px solid rgba(255, 179, 0, 0.3);
+}
+
+.badge-anran {
+  background: rgba(0, 229, 255, 0.15);
+  color: #00E5FF;
+  border: 1px solid rgba(0, 229, 255, 0.3);
+}
+
+.badge-aming {
+  background: rgba(255, 51, 68, 0.15);
+  color: #FF5A69;
+  border: 1px solid rgba(255, 51, 68, 0.3);
+}
+
+.track-chapters {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: #8E94A8;
+}
+
+.track-steps {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.t-step {
+  font-size: 0.86rem;
+  color: #D2D6E3;
+  padding: 4px 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+}
+
+.highlight-step {
+  color: var(--accent-amber);
+  border-color: var(--accent-amber);
+  font-weight: 700;
+  box-shadow: 0 0 10px var(--accent-amber-glow);
+}
+
+.highlight-step-cyan {
+  color: var(--accent-cyan);
+  border-color: var(--accent-cyan);
+  font-weight: 700;
+  box-shadow: 0 0 10px var(--accent-cyan-glow);
+}
+
+.highlight-step-red {
+  color: var(--accent-red);
+  border-color: var(--accent-red);
+  font-weight: 700;
+  box-shadow: 0 0 10px var(--accent-red-glow);
+}
+
+.t-arrow {
+  color: #64697B;
+  font-weight: bold;
+}
+
+.fate-lin-bridge {
+  background: rgba(186, 104, 200, 0.1);
+  border-left: 3px solid #BA68C8;
+  padding: 12px 18px;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.bridge-tag {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #CE93D8;
+  white-space: nowrap;
+}
+
+.fate-lin-bridge p {
+  font-size: 0.85rem;
+  color: #E1BEE7;
+  margin: 0;
+}
+
 .chapter-tabs {
   display: flex;
   flex-wrap: wrap;
@@ -1874,8 +2061,196 @@ a {
   border: 1px solid rgba(255, 51, 68, 0.3);
 }
 
+/* 1024 Update: Formula Badge in State Machine */
+.sm-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.sm-formula-badge {
+  background: rgba(255, 179, 0, 0.12);
+  border: 1px solid rgba(255, 179, 0, 0.35);
+  color: #FFC107;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+}
+
 /* ==========================================================================
-   12 / Visual Identity & AI Pipeline
+   14-15 / Benchmarks & Differentiation (1024 Update)
+   ========================================================================== */
+.benchmarks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.benchmark-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+}
+
+.benchmark-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+}
+
+.bm-poster-wrapper {
+  position: relative;
+  height: 280px;
+  overflow: hidden;
+  background: #000;
+}
+
+.bm-poster {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.benchmark-card:hover .bm-poster {
+  transform: scale(1.05);
+}
+
+.bm-year {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(8, 9, 12, 0.85);
+  backdrop-filter: blur(8px);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent-amber);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 179, 0, 0.3);
+}
+
+.bm-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.bm-title {
+  font-size: 1.35rem;
+  margin-bottom: 4px;
+  color: #FFF;
+}
+
+.bm-highlight {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--accent-cyan);
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.bm-takeaway {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: #B5BBCB;
+}
+
+.diff-core-box {
+  background: linear-gradient(135deg, rgba(20, 26, 38, 0.9) 0%, rgba(12, 16, 24, 0.95) 100%);
+  border: 1px solid rgba(255, 179, 0, 0.3);
+  border-radius: var(--radius-xl);
+  padding: 36px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.diff-tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  color: var(--accent-amber);
+  margin-bottom: 8px;
+  display: inline-block;
+}
+
+.diff-header h3 {
+  font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+  margin-bottom: 8px;
+}
+
+.diff-header p {
+  font-size: 0.95rem;
+  color: #9EA3B5;
+  margin-bottom: 24px;
+}
+
+.diff-features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.diff-item {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  display: flex;
+  gap: 14px;
+  transition: var(--transition);
+}
+
+.diff-item:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-3px);
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.diff-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.diff-text strong {
+  display: block;
+  font-size: 0.98rem;
+  color: #FFF;
+  margin-bottom: 4px;
+}
+
+.diff-text span {
+  font-size: 0.84rem;
+  color: #9EA3B5;
+  line-height: 1.5;
+  display: block;
+}
+
+.highlight-ai-diff {
+  border-color: rgba(0, 229, 255, 0.35);
+  background: rgba(0, 229, 255, 0.05);
+}
+
+.highlight-ai-diff:hover {
+  border-color: var(--accent-cyan);
+  box-shadow: 0 6px 20px var(--accent-cyan-glow);
+}
+
+/* ==========================================================================
+   16 / Visual Identity & AI Pipeline
    ========================================================================== */
 .visuals-trio-grid {
   display: grid;
