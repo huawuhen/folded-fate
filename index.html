@@ -1055,12 +1055,23 @@
     </div>
   </footer>
 
-  <!-- Deck Presentation Mode Controller Floating Bar -->
+  <!-- Deck Presentation Mode Controller Floating Bar & Shortcut Tip -->
   <div class="deck-controls" id="deckControls">
-    <button class="deck-btn" id="deckPrev" title="上一页 (←)">‹</button>
+    <button class="deck-btn" id="deckPrev" title="上一页 (← 或 PgUp)">‹</button>
     <span class="deck-page-indicator" id="deckPageIndicator">1 / 9</span>
-    <button class="deck-btn" id="deckNext" title="下一页 (→)">›</button>
+    <button class="deck-btn" id="deckNext" title="下一页 (→ 或 空格)">›</button>
+    <span class="deck-key-hint"><kbd>←</kbd> <kbd>→</kbd> <kbd>Space</kbd></span>
     <button class="deck-btn deck-exit" id="deckExit" title="退出演示模式 (Esc)">✕</button>
+  </div>
+
+  <!-- Transparent Shortcut Floating Tip (Bottom-Right) -->
+  <div class="shortcut-tip-pill" id="shortcutTip" role="status" aria-live="polite">
+    <div class="tip-icon">⌨️</div>
+    <div class="tip-text">
+      <span class="tip-title">快捷键提示</span>
+      <span class="tip-desc">支持键盘 <kbd>←</kbd> / <kbd>→</kbd> / <kbd>Space</kbd> 丝滑切页</span>
+    </div>
+    <button class="tip-close-btn" id="tipCloseBtn" aria-label="关闭提示">✕</button>
   </div>
 
   <!-- Scripts -->

@@ -185,7 +185,7 @@ function initChapterFilter() {
 }
 
 /* ==========================================================================
-   5. 演示模式（Deck Presentation Mode）
+   5. 演示模式（Deck Presentation Mode）与快捷键控制
    ========================================================================== */
 function initDeckMode() {
   const toggleBtn = document.getElementById('deckModeToggle');
@@ -194,10 +194,40 @@ function initDeckMode() {
   const nextBtn = document.getElementById('deckNext');
   const exitBtn = document.getElementById('deckExit');
   const indicator = document.getElementById('deckPageIndicator');
+  const shortcutTip = document.getElementById('shortcutTip');
+  const tipCloseBtn = document.getElementById('tipCloseBtn');
 
   const sections = Array.from(document.querySelectorAll('main > section'));
   let currentIndex = 0;
   let isDeckMode = false;
+
+  // 快捷键提示关闭按钮
+  if (tipCloseBtn && shortcutTip) {
+    tipCloseBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      shortcutTip.classList.add('dismissed');
+    });
+  }
+
+  // 点击提示条本身也能快速切换演示模式
+  if (shortcutTip) {
+    shortcutTip.addEventListener('click', (e) => {
+      if (e.target !== tipCloseBtn) {
+        if (!isDeckMode) enterDeckMode();
+      }
+    });
+  }
+
+  function getCurrentSectionIndex() {
+    // 根据当前滚动视口确定最靠近顶部的 section
+    const scrollPos = window.scrollY + 100;
+    for (let i = sections.length - 1; i >= 0; i--) {
+      if (scrollPos >= sections[i].offsetTop) {
+        return i;
+      }
+    }
+    return 0;
+  }
 
   function updateDeckView() {
     if (!isDeckMode) return;
@@ -210,15 +240,22 @@ function initDeckMode() {
 
   function enterDeckMode() {
     isDeckMode = true;
+    currentIndex = getCurrentSectionIndex();
     document.body.classList.add('deck-mode-active');
-    toggleBtn.querySelector('.btn-text').textContent = '退出演示';
+    if (toggleBtn) {
+      toggleBtn.querySelector('.btn-text').textContent = '退出演示';
+      toggleBtn.classList.add('active');
+    }
     updateDeckView();
   }
 
   function exitDeckMode() {
     isDeckMode = false;
     document.body.classList.remove('deck-mode-active');
-    toggleBtn.querySelector('.btn-text').textContent = '演示模式';
+    if (toggleBtn) {
+      toggleBtn.querySelector('.btn-text').textContent = '演示模式';
+      toggleBtn.classList.remove('active');
+    }
   }
 
   if (toggleBtn) {
@@ -253,21 +290,43 @@ function initDeckMode() {
 
   // 键盘快捷键监听
   window.addEventListener('keydown', (e) => {
-    if (!isDeckMode) return;
-    if (e.key === 'ArrowRight' || e.key === 'Space') {
+    // 忽略输入框或表单输入时的事件
+    if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+
+    if (e.key === 'ArrowRight' || e.key === 'Space' || e.key === 'PageDown') {
       e.preventDefault();
+      if (!isDeckMode) {
+        enterDeckMode();
+      }
       if (currentIndex < sections.length - 1) {
         currentIndex++;
         updateDeckView();
       }
-    } else if (e.key === 'ArrowLeft') {
+    } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
       e.preventDefault();
+      if (!isDeckMode) {
+        enterDeckMode();
+      }
       if (currentIndex > 0) {
         currentIndex--;
         updateDeckView();
       }
+    } else if (e.key === 'Home') {
+      if (isDeckMode) {
+        e.preventDefault();
+        currentIndex = 0;
+        updateDeckView();
+      }
+    } else if (e.key === 'End') {
+      if (isDeckMode) {
+        e.preventDefault();
+        currentIndex = sections.length - 1;
+        updateDeckView();
+      }
     } else if (e.key === 'Escape') {
-      exitDeckMode();
+      if (isDeckMode) {
+        exitDeckMode();
+      }
     }
   });
 }
