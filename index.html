@@ -772,11 +772,30 @@
         </div>
 
         <div class="prototype-card">
-          <div class="proto-scene-media">
+          <div class="proto-scene-media" id="protoSceneMedia">
+            <!-- 初始场景静态画面 -->
             <img src="assets/images/scene-bar.jpg" alt="酒吧风波场景" class="proto-scene-img" id="protoSceneImg">
+
+            <!-- 动态实机影视视频播放器 (1:1 正方形画幅) -->
+            <video class="proto-video" id="protoVideo" playsinline preload="auto" style="display: none;">
+              您的浏览器不支持 HTML5 视频播放。
+            </video>
+
+            <!-- 电影级暗角滤镜 -->
+            <div class="proto-media-vignette" aria-hidden="true"></div>
+
+            <!-- 顶部 HUD 态势条 -->
             <div class="proto-hud-overlay">
               <span class="hud-tag">第 01 章 · 放映模式</span>
               <span class="hud-status" id="protoHudStatus">等待玩家抉择</span>
+            </div>
+
+            <!-- 底部：人物形象测试声明（弱化提示）与重播控件 -->
+            <div class="proto-media-footer">
+              <span class="proto-disclaimer">人物形象仅为测试非终版</span>
+              <button class="proto-replay-btn" id="protoReplayBtn" title="重新放映此片段" style="display: none;">
+                <span>↺ 重新放映</span>
+              </button>
             </div>
           </div>
 
@@ -1339,6 +1358,6 @@
   </div>
 
   <!-- Scripts -->
-  <script src="js/main.js"></script>
+  <script src="js/main.js?v=20261024_video"></script>
 </body>
 </html>

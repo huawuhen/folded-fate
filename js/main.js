@@ -54,6 +54,44 @@ function initPrototypeSimulator() {
   const step2 = document.getElementById('protoStep2');
   const step3 = document.getElementById('protoStep3');
   const resetBtn = document.getElementById('protoResetBtn');
+  const protoSceneImg = document.getElementById('protoSceneImg');
+  const protoVideo = document.getElementById('protoVideo');
+  const protoReplayBtn = document.getElementById('protoReplayBtn');
+
+  const VIDEO_MAP = {
+    A: "assets/media/a-20261024-171624.mp4",
+    B: "assets/media/b-20261024-171712.mp4",
+    C: "assets/media/c-20261024-171736.mp4"
+  };
+
+  let currentChoice = null;
+
+  // 视频播放结束监听：仅播放一遍，结束后显示重新放映按钮
+  if (protoVideo) {
+    protoVideo.addEventListener('ended', () => {
+      if (protoReplayBtn) protoReplayBtn.style.display = 'inline-flex';
+      if (currentChoice && BRANCH_DATA[currentChoice] && hudStatus) {
+        hudStatus.textContent = BRANCH_DATA[currentChoice].status;
+      }
+    });
+  }
+
+  // 重新放映按钮事件
+  if (protoReplayBtn && protoVideo) {
+    protoReplayBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      protoVideo.currentTime = 0;
+      protoVideo.loop = false;
+      protoReplayBtn.style.display = 'none';
+      if (currentChoice && hudStatus) {
+        hudStatus.textContent = `🎬 放映分支 ${currentChoice} 片段`;
+      }
+      protoVideo.play().catch(() => {
+        protoVideo.muted = true;
+        protoVideo.play();
+      });
+    });
+  }
 
   const BRANCH_DATA = {
     A: {
@@ -86,12 +124,39 @@ function initPrototypeSimulator() {
     btn.addEventListener('click', () => {
       const choice = btn.getAttribute('data-choice');
       const data = BRANCH_DATA[choice];
+      currentChoice = choice;
 
       choiceButtons.forEach(b => b.classList.remove('selected'));
       btn.classList.add('selected');
 
+      // 切换并播放对应实机影视片段
+      if (protoVideo && VIDEO_MAP[choice]) {
+        if (protoSceneImg) protoSceneImg.style.display = 'none';
+        protoVideo.style.display = 'block';
+
+        if (protoVideo.getAttribute('data-current-choice') !== choice) {
+          protoVideo.src = VIDEO_MAP[choice];
+          protoVideo.setAttribute('data-current-choice', choice);
+          protoVideo.load();
+        } else {
+          protoVideo.currentTime = 0;
+        }
+
+        protoVideo.loop = false; // 严格播放一遍
+        if (protoReplayBtn) protoReplayBtn.style.display = 'none';
+
+        // 尝试自动播放
+        const playPromise = protoVideo.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(() => {
+            protoVideo.muted = true;
+            protoVideo.play();
+          });
+        }
+      }
+
       // 更新 HUD
-      if (hudStatus) hudStatus.textContent = data.status;
+      if (hudStatus) hudStatus.textContent = `🎬 放映分支 ${choice} 片段`;
 
       // 更新内容
       resultBadge.textContent = data.badge;
@@ -110,6 +175,16 @@ function initPrototypeSimulator() {
       choiceButtons.forEach(b => b.classList.remove('selected'));
       resultBox.style.display = 'none';
       if (hudStatus) hudStatus.textContent = "等待玩家抉择";
+
+      if (protoVideo) {
+        protoVideo.pause();
+        protoVideo.currentTime = 0;
+        protoVideo.style.display = 'none';
+        protoVideo.removeAttribute('data-current-choice');
+      }
+      if (protoSceneImg) protoSceneImg.style.display = 'block';
+      if (protoReplayBtn) protoReplayBtn.style.display = 'none';
+      currentChoice = null;
     });
   }
 }
