@@ -229,14 +229,42 @@ function initDeckMode() {
     return 0;
   }
 
+  function syncBackdropWithSlide(idx) {
+    const posterLayer = document.querySelector('.backdrop-poster-layer');
+    if (!posterLayer) return;
+    const progress = sections.length > 1 ? idx / (sections.length - 1) : 0;
+    const shiftY = (progress * 36 - 18).toFixed(1);
+    const shiftX = (Math.sin(idx * 0.8) * 10).toFixed(1);
+    const scale = (1.04 + (idx % 3) * 0.015).toFixed(3);
+    posterLayer.style.transform = `scale(${scale}) translate3d(${shiftX}px, ${shiftY}px, 0)`;
+  }
+
   function updateDeckView() {
     if (!isDeckMode) return;
     const targetSection = sections[currentIndex];
     if (targetSection) {
       targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
       indicator.textContent = `${currentIndex + 1} / ${sections.length}`;
+      syncBackdropWithSlide(currentIndex);
     }
   }
+
+  // 滚动时背景磨砂海报的微视差
+  let scrollTicking = false;
+  window.addEventListener('scroll', () => {
+    if (!scrollTicking && !isDeckMode) {
+      window.requestAnimationFrame(() => {
+        const posterLayer = document.querySelector('.backdrop-poster-layer');
+        if (posterLayer) {
+          const scrollFrac = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight || 1);
+          const shiftY = (scrollFrac * 30 - 15).toFixed(1);
+          posterLayer.style.transform = `scale(1.04) translate3d(0, ${shiftY}px, 0)`;
+        }
+        scrollTicking = false;
+      });
+      scrollTicking = true;
+    }
+  }, { passive: true });
 
   function enterDeckMode() {
     isDeckMode = true;
