@@ -2066,10 +2066,12 @@ body.deck-mode-active .deck-controls {
 .deck-key-hint {
   display: flex;
   align-items: center;
-  gap: 4px;
-  padding: 0 6px;
+  gap: 5px;
+  padding: 0 10px;
   border-left: 1px solid var(--border-light);
   border-right: 1px solid var(--border-light);
+  font-size: 0.75rem;
+  color: #8E94A8;
 }
 
 /* Keyboard Tag (<kbd>) */
@@ -2115,10 +2117,9 @@ kbd {
   transform: translateY(-2px);
 }
 
+/* When Deck Mode Active: Hide the standalone tip pill to avoid duplication */
 body.deck-mode-active .shortcut-tip-pill {
-  bottom: 80px;
-  background: rgba(14, 18, 26, 0.88);
-  border-color: rgba(255, 179, 0, 0.3);
+  display: none !important;
 }
 
 .tip-icon {
