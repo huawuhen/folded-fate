@@ -772,30 +772,105 @@
         </div>
 
         <div class="prototype-card">
-          <div class="proto-scene-media" id="protoSceneMedia">
-            <!-- 初始场景静态画面 -->
-            <img src="assets/images/scene-bar.jpg" alt="酒吧风波场景" class="proto-scene-img" id="protoSceneImg">
+          <!-- 左侧：1:1 实机媒体放映与决策态势监控栏 -->
+          <div class="proto-media-column">
+            <div class="proto-scene-media" id="protoSceneMedia">
+              <!-- 初始场景静态画面 -->
+              <img src="assets/images/scene-bar.jpg" alt="酒吧风波场景" class="proto-scene-img" id="protoSceneImg">
 
-            <!-- 动态实机影视视频播放器 (1:1 正方形画幅) -->
-            <video class="proto-video" id="protoVideo" playsinline preload="auto" style="display: none;">
-              您的浏览器不支持 HTML5 视频播放。
-            </video>
+              <!-- 动态实机影视视频播放器 (1:1 正方形画幅) -->
+              <video class="proto-video" id="protoVideo" playsinline preload="auto" style="display: none;">
+                您的浏览器不支持 HTML5 视频播放。
+              </video>
 
-            <!-- 电影级暗角滤镜 -->
-            <div class="proto-media-vignette" aria-hidden="true"></div>
+              <!-- 电影级暗角滤镜 -->
+              <div class="proto-media-vignette" aria-hidden="true"></div>
 
-            <!-- 顶部 HUD 态势条 -->
-            <div class="proto-hud-overlay">
-              <span class="hud-tag">第 01 章 · 放映模式</span>
-              <span class="hud-status" id="protoHudStatus">等待玩家抉择</span>
+              <!-- 顶部 HUD 态势条 -->
+              <div class="proto-hud-overlay">
+                <span class="hud-tag">第 01 章 · 放映模式</span>
+                <span class="hud-status" id="protoHudStatus">等待玩家抉择</span>
+              </div>
+
+              <!-- 底部：人物形象测试声明（弱化提示）与重播控件 -->
+              <div class="proto-media-footer">
+                <span class="proto-disclaimer">人物形象仅为测试非终版</span>
+                <button class="proto-replay-btn" id="protoReplayBtn" title="重新放映此片段" style="display: none;">
+                  <span>↺ 重新放映</span>
+                </button>
+              </div>
             </div>
 
-            <!-- 底部：人物形象测试声明（弱化提示）与重播控件 -->
-            <div class="proto-media-footer">
-              <span class="proto-disclaimer">人物形象仅为测试非终版</span>
-              <button class="proto-replay-btn" id="protoReplayBtn" title="重新放映此片段" style="display: none;">
-                <span>↺ 重新放映</span>
-              </button>
+            <!-- 影视级决策态势看板 (Telemetry Dashboard) -->
+            <div class="proto-telemetry-dashboard" id="protoTelemetry">
+              <div class="telemetry-top-bar">
+                <div class="telemetry-label-wrap">
+                  <span class="telemetry-live-dot"></span>
+                  <span class="telemetry-title">主角心理指征与蝴蝶效应推演</span>
+                </div>
+                <span class="telemetry-mode-tag" id="telemetryModeTag">REALTIME · 实时监测</span>
+              </div>
+
+              <div class="telemetry-metrics-grid">
+                <!-- 指标 1：心率与心电波形 -->
+                <div class="telemetry-metric-card">
+                  <div class="metric-header">
+                    <span class="metric-label">心率波动 (ECG)</span>
+                    <span class="metric-badge" id="telemetryBpmStatus">心率平稳</span>
+                  </div>
+                  <div class="metric-val-row">
+                    <div class="metric-val-group">
+                      <span class="metric-number font-mono" id="telemetryBpm">82</span>
+                      <span class="metric-unit">BPM</span>
+                    </div>
+                    <!-- ECG 动态脉冲波形 -->
+                    <div class="ecg-wave-box" aria-hidden="true">
+                      <svg class="ecg-svg" viewBox="0 0 100 24" preserveAspectRatio="none">
+                        <path class="ecg-path" id="ecgPath" d="M0,12 L20,12 L25,4 L30,20 L35,12 L50,12 L55,2 L62,22 L68,12 L85,12 L90,6 L95,12 L100,12" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 指标 2：心理承压指数 -->
+                <div class="telemetry-metric-card">
+                  <div class="metric-header">
+                    <span class="metric-label">心理承压 (STRESS)</span>
+                    <span class="metric-badge" id="telemetryStressText">35% · 状态可控</span>
+                  </div>
+                  <div class="telemetry-progress-track">
+                    <div class="telemetry-progress-bar level-normal" id="telemetryStressBar" style="width: 35%;"></div>
+                  </div>
+                </div>
+
+                <!-- 指标 3：真相调查深度 -->
+                <div class="telemetry-metric-card">
+                  <div class="metric-header">
+                    <span class="metric-label">真相深度 (TRUTH)</span>
+                    <span class="metric-badge delta-tag" id="telemetryTruthDelta">基准线</span>
+                  </div>
+                  <div class="telemetry-progress-track">
+                    <div class="telemetry-progress-bar bar-truth" id="telemetryTruthBar" style="width: 40%;"></div>
+                  </div>
+                </div>
+
+                <!-- 指标 4：危机暴露指数 -->
+                <div class="telemetry-metric-card">
+                  <div class="metric-header">
+                    <span class="metric-label">危机涉险 (THREAT)</span>
+                    <span class="metric-badge delta-tag" id="telemetryDangerDelta">正常</span>
+                  </div>
+                  <div class="telemetry-progress-track">
+                    <div class="telemetry-progress-bar bar-danger" id="telemetryDangerBar" style="width: 20%;"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 蝴蝶效应因果锚点提示条 -->
+              <div class="telemetry-causality-box">
+                <span class="causality-icon">⚡</span>
+                <span class="causality-text" id="telemetryCausality">提示：点击右侧任意抉择，即刻推演该行为对主线剧情的深层连锁震荡</span>
+              </div>
             </div>
           </div>
 
@@ -841,6 +916,15 @@
                 </div>
                 <span class="choice-arrow">→</span>
               </button>
+            </div>
+
+            <!-- 初始待机提示 (未做选择时展示) -->
+            <div class="proto-choice-hint" id="protoChoiceHint">
+              <span class="hint-pulse-icon">👆</span>
+              <div class="hint-text-group">
+                <span class="hint-primary">请点击上方任一分支选项 (A / B / C)</span>
+                <span class="hint-secondary">左侧将即刻播放对应实机影视片段，并推演角色心理与蝴蝶效应态势</span>
+              </div>
             </div>
 
             <!-- Dynamic Result Area -->
@@ -1358,6 +1442,6 @@
   </div>
 
   <!-- Scripts -->
-  <script src="js/main.js?v=20261024_video"></script>
+  <script src="js/main.js?v=20261024_telemetry"></script>
 </body>
 </html>

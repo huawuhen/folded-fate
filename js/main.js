@@ -47,6 +47,7 @@ function initNavbar() {
 function initPrototypeSimulator() {
   const choiceButtons = document.querySelectorAll('#protoChoicesGrid .choice-btn');
   const resultBox = document.getElementById('protoResultBox');
+  const protoChoiceHint = document.getElementById('protoChoiceHint');
   const hudStatus = document.getElementById('protoHudStatus');
   const resultBadge = document.getElementById('protoResultBadge');
   const resultTitle = document.getElementById('protoResultTitle');
@@ -57,6 +58,58 @@ function initPrototypeSimulator() {
   const protoSceneImg = document.getElementById('protoSceneImg');
   const protoVideo = document.getElementById('protoVideo');
   const protoReplayBtn = document.getElementById('protoReplayBtn');
+
+  // 态势面板 DOM 元素
+  const telemetryBpm = document.getElementById('telemetryBpm');
+  const telemetryBpmStatus = document.getElementById('telemetryBpmStatus');
+  const telemetryStressText = document.getElementById('telemetryStressText');
+  const telemetryStressBar = document.getElementById('telemetryStressBar');
+  const telemetryTruthDelta = document.getElementById('telemetryTruthDelta');
+  const telemetryTruthBar = document.getElementById('telemetryTruthBar');
+  const telemetryDangerDelta = document.getElementById('telemetryDangerDelta');
+  const telemetryDangerBar = document.getElementById('telemetryDangerBar');
+  const telemetryCausality = document.getElementById('telemetryCausality');
+  const telemetryModeTag = document.getElementById('telemetryModeTag');
+
+  const TELEMETRY_BASELINE = {
+    bpm: "82",
+    bpmStatus: "心率平稳",
+    bpmBadgeClass: "metric-badge",
+    stress: 35,
+    stressText: "35% · 状态可控",
+    stressLevel: "level-normal",
+    truth: 40,
+    truthDelta: "基准线",
+    danger: 20,
+    dangerDelta: "正常",
+    causality: "提示：点击右侧任意抉择，即刻推演该行为对主线剧情的深层连锁震荡",
+    modeTag: "REALTIME · 实时监测"
+  };
+
+  function applyTelemetry(t, isActive = false) {
+    if (telemetryBpm) telemetryBpm.textContent = t.bpm;
+    if (telemetryBpmStatus) {
+      telemetryBpmStatus.textContent = t.bpmStatus;
+      telemetryBpmStatus.className = t.bpmBadgeClass || "metric-badge";
+    }
+    if (telemetryStressText) telemetryStressText.textContent = t.stressText;
+    if (telemetryStressBar) {
+      telemetryStressBar.style.width = `${t.stress}%`;
+      telemetryStressBar.className = `telemetry-progress-bar ${t.stressLevel}`;
+    }
+    if (telemetryTruthDelta) telemetryTruthDelta.textContent = t.truthDelta;
+    if (telemetryTruthBar) telemetryTruthBar.style.width = `${t.truth}%`;
+    if (telemetryDangerDelta) telemetryDangerDelta.textContent = t.dangerDelta;
+    if (telemetryDangerBar) telemetryDangerBar.style.width = `${t.danger}%`;
+    if (telemetryCausality) telemetryCausality.textContent = t.causality;
+    if (telemetryModeTag) telemetryModeTag.textContent = t.modeTag;
+
+    const causalityBox = document.querySelector('.telemetry-causality-box');
+    if (causalityBox) {
+      if (isActive) causalityBox.classList.add('active-choice');
+      else causalityBox.classList.remove('active-choice');
+    }
+  }
 
   const VIDEO_MAP = {
     A: "assets/media/a-20261024-171624.mp4",
@@ -100,7 +153,21 @@ function initPrototypeSimulator() {
       status: "剧情走向：自证困境",
       step1: "周放发动汽车迅速离开了酒吧；驶离现场 500 米时，中控屏突然跳出安冉的紧急来电。",
       step2: "【不接听】：翌日新闻头条报道安冉于后巷遇害，行车记录仪录入离开路线，周放被公安机关列为重大嫌疑对象。<br>【接听】：电话中安冉在呼救中断线，背景传来清晰的碰撞声与某方言咒骂。",
-      step3: "接听后可进一步抉择“就此回家”或“掉头报警”，不同的处理将直接决定后续周放被审讯时的口供真伪判定及家人安危。"
+      step3: "接听后可进一步抉择“就此回家”或“掉头报警”，不同的处理将直接决定后续周放被审讯时的口供真伪判定及家人安危。",
+      telemetry: {
+        bpm: "106",
+        bpmStatus: "心率加速",
+        bpmBadgeClass: "metric-badge badge-warning",
+        stress: 55,
+        stressText: "55% · 隐忧戒备",
+        stressLevel: "level-warning",
+        truth: 25,
+        truthDelta: "-15% 错失先机",
+        danger: 45,
+        dangerDelta: "+25% 潜伏暗涌",
+        causality: "🔗 因果锁定：【安冉遇险断线】错过第一现场直接线索，行车记录仪成为自证困境",
+        modeTag: "SIMULATION · 分支 A 推演"
+      }
     },
     B: {
       badge: "分支结果 B ｜ 报警求援",
@@ -108,7 +175,21 @@ function initPrototypeSimulator() {
       status: "剧情走向：追逐逃生",
       step1: "电话接通 110 之前，醉汉察觉异样直接对周放发起袭击；周放亮明记者身份并拉住安冉向后巷窄道撤离。",
       step2: "后方车辆突然亮起大灯疯狂加速逼近，二人穿入极其狭窄的死胡同避难，后方汽车撞击在铁门上火花四溅。",
-      step3: "躲开追逐后，玩家需在“护送安冉回家”与“就地分开”中做决断。若选择护送，将直接撞见受命前来的阿溟。"
+      step3: "躲开追逐后，玩家需在“护送安冉回家”与“就地分开”中做决断。若选择护送，将直接撞见受命前来的阿溟。",
+      telemetry: {
+        bpm: "128",
+        bpmStatus: "剧烈紧张",
+        bpmBadgeClass: "metric-badge badge-warning",
+        stress: 72,
+        stressText: "72% · 高度警戒",
+        stressLevel: "level-warning",
+        truth: 65,
+        truthDelta: "+25% 官方立案",
+        danger: 60,
+        dangerDelta: "+40% 遭到围堵",
+        causality: "🔗 因果锁定：【后巷死斗触发】固定出警时间轴与自保口供，但激怒暗中盯梢团伙",
+        modeTag: "SIMULATION · 分支 B 推演"
+      }
     },
     C: {
       badge: "分支结果 C ｜ 当场介入",
@@ -116,7 +197,21 @@ function initPrototypeSimulator() {
       status: "剧情走向：舆论双刃剑",
       step1: "周放高举手机亮屏录像、高声亮明调查记者身份并大声呼喊，迅速引来酒吧街周边多名路人围观形成人墙压力。",
       step2: "纠缠者在聚光灯与手机镜头下被当众喝退，但周放当众介入的这一幕被他人拍下，成为日后网暴周放的病毒级伪证原素材。",
-      step3: "安冉得以脱身并向周放借调充电宝与隐秘线索 U 盘，周放由此提前获得了调查线索的接触权，但也被黑产团伙死死盯上。"
+      step3: "安冉得以脱身并向周放借调充电宝与隐秘线索 U 盘，周放由此提前获得了调查线索的接触权，但也被黑产团伙死死盯上。",
+      telemetry: {
+        bpm: "148",
+        bpmStatus: "心率飙升",
+        bpmBadgeClass: "metric-badge badge-danger",
+        stress: 92,
+        stressText: "92% · 极度紧绷",
+        stressLevel: "level-danger",
+        truth: 90,
+        truthDelta: "+50% 一手铁证",
+        danger: 88,
+        dangerDelta: "+68% 正面冲突",
+        causality: "🔗 因果锁定：【涉案U盘截获】赢得安冉绝密信任，当场固证但沦为舆论风暴靶心",
+        modeTag: "SIMULATION · 分支 C 推演"
+      }
     }
   };
 
@@ -158,6 +253,11 @@ function initPrototypeSimulator() {
       // 更新 HUD
       if (hudStatus) hudStatus.textContent = `🎬 放映分支 ${choice} 片段`;
 
+      // 同步更新左侧影视级态势监控面板
+      if (data.telemetry) {
+        applyTelemetry(data.telemetry, true);
+      }
+
       // 更新内容
       resultBadge.textContent = data.badge;
       resultTitle.textContent = data.title;
@@ -165,6 +265,7 @@ function initPrototypeSimulator() {
       step2.innerHTML = data.step2;
       step3.innerHTML = data.step3;
 
+      if (protoChoiceHint) protoChoiceHint.style.display = 'none';
       resultBox.style.display = 'block';
       resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     });
@@ -174,7 +275,11 @@ function initPrototypeSimulator() {
     resetBtn.addEventListener('click', () => {
       choiceButtons.forEach(b => b.classList.remove('selected'));
       resultBox.style.display = 'none';
+      if (protoChoiceHint) protoChoiceHint.style.display = 'flex';
       if (hudStatus) hudStatus.textContent = "等待玩家抉择";
+
+      // 重置态势面板到基准线
+      applyTelemetry(TELEMETRY_BASELINE, false);
 
       if (protoVideo) {
         protoVideo.pause();
