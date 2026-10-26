@@ -52,7 +52,7 @@ html {
 
 body {
   font-family: var(--font-sans);
-  background-color: transparent;
+  background-color: var(--bg-dark);
   color: var(--text-main);
   line-height: 1.68;
   overflow-x: hidden;
@@ -93,51 +93,6 @@ body {
   background: radial-gradient(circle, var(--accent-amber) 0%, transparent 70%);
 }
 
-/* ==========================================================================
-   Global Frosted Poster Backdrop (电影级磨砂海报全局背景)
-   ========================================================================== */
-.site-backdrop-fixed {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
-}
-
-.backdrop-poster-layer {
-  position: absolute;
-  inset: -6%;
-  width: 112%;
-  height: 112%;
-  background-image: url('../assets/images/hero-poster-master.png');
-  background-position: center 30%;
-  background-size: cover;
-  background-repeat: no-repeat;
-  filter: brightness(0.72) contrast(1.22) saturate(1.25);
-  opacity: 0.88;
-  transform: scale(1.04);
-  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform;
-}
-
-/* 磨砂质感核心层：结合高斯模糊、微暗色阶与轻微沉浸渐变 */
-.backdrop-frost-layer {
-  position: absolute;
-  inset: 0;
-  backdrop-filter: blur(18px) saturate(1.35);
-  -webkit-backdrop-filter: blur(18px) saturate(1.35);
-  background: radial-gradient(circle at 70% 32%, rgba(20, 24, 36, 0.35) 0%, rgba(8, 9, 12, 0.62) 50%, rgba(5, 6, 8, 0.86) 100%),
-              linear-gradient(180deg, rgba(8, 9, 12, 0.18) 0%, rgba(8, 9, 12, 0.52) 100%);
-}
-
-.backdrop-vignette-layer {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 50% 50%, transparent 35%, rgba(8, 9, 12, 0.65) 100%);
-}
-
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
   color: #FFFFFF;
@@ -172,23 +127,19 @@ a {
 }
 
 .section-darker {
-  background-color: rgba(5, 6, 8, 0.72);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background-color: var(--bg-darker);
   border-top: 1px solid var(--border-light);
   border-bottom: 1px solid var(--border-light);
 }
 
-.section-darker.has-floating-bg {
-  background-color: rgba(5, 6, 8, 0.45);
-}
-
 /* ==========================================================================
-   Section Transparent Floating Backgrounds (影调透明浮动背景)
+   Section Transparent Floating Backgrounds (图片完全为背景 · 90%不透明度 · 无磨砂)
    ========================================================================== */
-.has-floating-bg {
+.has-floating-bg,
+.section-darker.has-floating-bg {
   position: relative;
   overflow: hidden;
+  background-color: #08090C;
 }
 
 .section-floating-bg-wrapper {
@@ -204,8 +155,8 @@ a {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  opacity: 0.22;
-  filter: brightness(0.92) contrast(1.15) saturate(1.1);
+  opacity: 0.9;
+  filter: none;
   will-change: transform;
 }
 
@@ -222,34 +173,37 @@ a {
 }
 
 @keyframes floatingBgMove1 {
-  0% { transform: scale(1.04) translate(0, 0); }
-  50% { transform: scale(1.08) translate(-1.5%, -1%); }
-  100% { transform: scale(1.05) translate(1.2%, 0.8%); }
+  0% { transform: scale(1.18) translate(0, 0); }
+  50% { transform: scale(1.22) translate(-1.5%, -1%); }
+  100% { transform: scale(1.19) translate(1.2%, 0.8%); }
 }
 
 @keyframes floatingBgMove2 {
-  0% { transform: scale(1.05) translate(0, 0); }
-  50% { transform: scale(1.09) translate(1.2%, -1.2%); }
-  100% { transform: scale(1.04) translate(-1%, 0.6%); }
+  0% { transform: scale(1.18) translate(0, 0); }
+  50% { transform: scale(1.22) translate(1.2%, -1.2%); }
+  100% { transform: scale(1.17) translate(-1%, 0.6%); }
 }
 
 @keyframes floatingBgMove3 {
-  0% { transform: scale(1.03) translate(0, 0); }
-  50% { transform: scale(1.07) translate(-1%, 1%); }
-  100% { transform: scale(1.05) translate(1.5%, -0.8%); }
+  0% { transform: scale(1.17) translate(0, 0); }
+  50% { transform: scale(1.21) translate(-1%, 1%); }
+  100% { transform: scale(1.19) translate(1.5%, -0.8%); }
 }
 
 .section-floating-bg-overlay {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 50% 45%, rgba(8, 9, 12, 0.45) 0%, rgba(8, 9, 12, 0.84) 68%, rgba(8, 9, 12, 0.97) 100%),
-              linear-gradient(to bottom, rgba(8, 9, 12, 0.9) 0%, transparent 20%, transparent 80%, rgba(8, 9, 12, 0.95) 100%);
-  pointer-events: none;
+  display: none;
 }
 
 .has-floating-bg .container {
   position: relative;
   z-index: 1;
+}
+
+.has-floating-bg *,
+.has-floating-bg *::before,
+.has-floating-bg *::after {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
 }
 
 .section-header {
@@ -286,6 +240,25 @@ a {
   max-width: 780px;
   color: #9EA3B5;
   line-height: 1.7;
+}
+
+.has-floating-bg .section-title {
+  background: none;
+  -webkit-background-clip: border-box;
+  -webkit-text-fill-color: #FFFFFF;
+  color: #FFFFFF;
+  text-shadow: 0 3px 18px rgba(0, 0, 0, 0.95), 0 1px 6px rgba(0, 0, 0, 0.9);
+}
+
+.has-floating-bg .section-desc {
+  color: #EAEFF9;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.95), 0 1px 4px rgba(0, 0, 0, 0.9);
+}
+
+.has-floating-bg .section-tag {
+  background: rgba(10, 12, 16, 0.82);
+  border-color: rgba(255, 179, 0, 0.5);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
 }
 
 /* ==========================================================================
@@ -477,13 +450,13 @@ a {
 }
 
 /* ==========================================================================
-   Hero Section
+   Hero Section (电影海报融合排版 · 无遮罩全亮呈现)
    ========================================================================== */
 .hero-section {
   min-height: 100vh;
   display: flex;
-  align-items: center;
-  padding: 130px 0 80px;
+  align-items: stretch;
+  padding: 104px 0 44px;
   position: relative;
   overflow: hidden;
 }
@@ -499,92 +472,161 @@ a {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 25%;
-  filter: brightness(0.86) contrast(1.12) saturate(1.1);
+  object-position: center 28%;
+  filter: none;
+  opacity: 1;
   transform: none;
 }
 
 .hero-vignette {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, rgba(8, 9, 12, 0.8) 0%, rgba(8, 9, 12, 0.52) 42%, rgba(8, 9, 12, 0.12) 70%, rgba(8, 9, 12, 0.35) 100%),
-              linear-gradient(180deg, rgba(8, 9, 12, 0.5) 0%, transparent 20%, transparent 75%, rgba(8, 9, 12, 0.95) 100%);
-  pointer-events: none;
+  display: none;
 }
 
 .hero-content {
   position: relative;
-  max-width: 980px;
+  z-index: 2;
+  width: 100%;
+  max-width: var(--container-max);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: calc(100vh - 148px);
 }
 
-.badge-row {
+/* 电影海报印制级字卡与主标题排版 */
+.hero-poster-graphic {
+  max-width: 680px;
+  padding-top: 8px;
+}
+
+.poster-credit-header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 18px;
+  padding-left: 14px;
+  border-left: 3px solid var(--accent-red);
+}
+
+.poster-credit-en {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 3.5px;
+  color: #FF4D5D;
+  text-transform: uppercase;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.98), 0 0 20px rgba(0, 0, 0, 0.95);
+}
+
+.poster-credit-subrow {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 10px;
-  margin-bottom: 24px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.98), 0 0 18px rgba(0, 0, 0, 0.95);
+}
+
+.poster-credit-item {
+  color: #F0F3FA;
+}
+
+.poster-credit-sep {
+  color: rgba(255, 255, 255, 0.45);
+  font-weight: 300;
+}
+
+.poster-credit-company {
+  color: #FFD166;
+  font-weight: 700;
 }
 
 .hero-title {
   font-family: var(--font-serif);
-  font-size: clamp(3.2rem, 7vw, 5.5rem);
+  margin-bottom: 18px;
+}
+
+.poster-main-title {
+  display: block;
+  font-size: clamp(3.4rem, 6.5vw, 5.2rem);
   font-weight: 900;
-  letter-spacing: 2px;
+  letter-spacing: 6px;
   line-height: 1.05;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.88);
+  color: #FFFFFF;
+  text-shadow: 0 4px 28px rgba(0, 0, 0, 0.98), 0 2px 8px rgba(0, 0, 0, 0.98), 0 0 40px rgba(0, 0, 0, 0.85);
 }
 
 .hero-subtitle {
-  display: block;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
   font-family: var(--font-sans);
-  font-size: clamp(1.3rem, 2.5vw, 2rem);
-  font-weight: 600;
-  color: #B4B9CB;
-  margin-top: 10px;
-  letter-spacing: 3px;
+  font-size: clamp(1.15rem, 2vw, 1.55rem);
+  font-weight: 700;
+  color: #F4F6FB;
+  margin-top: 12px;
+  letter-spacing: 5px;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.98), 0 0 24px rgba(0, 0, 0, 0.95);
+}
+
+.subtitle-line {
+  display: inline-block;
+  width: 28px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-red), transparent);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
 }
 
 .hero-subtitle .symbol {
   color: var(--accent-red);
-  margin: 0 8px;
+  margin: 0 4px;
+  font-weight: 800;
 }
 
 .hero-tagline {
   font-family: var(--font-serif);
-  font-size: clamp(1.4rem, 2.8vw, 2rem);
-  color: #E2E6F2;
-  margin-bottom: 40px;
-  line-height: 1.45;
-  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.9);
+  font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+  font-weight: 600;
+  color: #FFFFFF;
+  margin-bottom: 24px;
+  line-height: 1.5;
+  letter-spacing: 1.5px;
+  text-shadow: 0 3px 18px rgba(0, 0, 0, 0.98), 0 1px 6px rgba(0, 0, 0, 0.98), 0 0 32px rgba(0, 0, 0, 0.9);
 }
 
 .highlight-red {
-  color: #FF4D5D;
+  color: #FF3B4E;
   font-weight: 900;
-  text-shadow: 0 0 20px rgba(255, 51, 68, 0.4);
+  text-shadow: 0 3px 18px rgba(0, 0, 0, 0.98), 0 0 24px rgba(255, 51, 68, 0.55);
+}
+
+.hero-bottom-dock {
+  width: 100%;
+  margin-top: auto;
+  padding-top: 20px;
 }
 
 .hero-specs-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 16px;
-  margin-bottom: 48px;
+  margin-bottom: 24px;
 }
 
 .spec-card {
-  background: rgba(18, 22, 31, 0.65);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--border-light);
+  background: rgba(10, 12, 18, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: var(--radius-md);
-  padding: 18px 20px;
+  padding: 16px 18px;
   transition: var(--transition);
 }
 
 .spec-card:hover {
-  border-color: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.3);
   transform: translateY(-3px);
-  background: rgba(26, 32, 45, 0.85);
+  background: rgba(16, 20, 28, 0.88);
 }
 
 .spec-num {
