@@ -1587,13 +1587,19 @@ a {
   text-shadow: 0 0 10px rgba(230, 57, 70, 0.4);
 }
 
-#perspectives .section-desc {
-  max-width: 980px;
+#concept .section-desc,
+#chapters .section-desc,
+#perspectives .section-desc,
+.section-desc-nowrap {
+  max-width: 1080px;
   white-space: nowrap;
 }
 
-@media (max-width: 992px) {
-  #perspectives .section-desc {
+@media (max-width: 1100px) {
+  #concept .section-desc,
+  #chapters .section-desc,
+  #perspectives .section-desc,
+  .section-desc-nowrap {
     white-space: normal;
   }
 }
