@@ -2819,8 +2819,10 @@ a {
 
 .layer-foot {
   font-family: var(--font-mono);
-  font-size: 0.78rem;
-  color: #798094;
+  font-size: 0.8rem;
+  color: var(--accent-amber);
+  font-weight: 600;
+  letter-spacing: 0.3px;
   padding-top: 12px;
   border-top: 1px solid var(--border-light);
 }
