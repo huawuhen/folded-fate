@@ -800,17 +800,91 @@ a {
   display: flex;
   align-items: center;
   gap: 16px;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
+}
+
+.concept-avatar-frame {
+  width: 64px;
+  height: 64px;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.55);
+  flex-shrink: 0;
+  position: relative;
+  background: #0B0E14;
+}
+
+.frame-amber {
+  border-color: rgba(255, 179, 0, 0.65);
+  box-shadow: 0 4px 16px rgba(255, 179, 0, 0.22);
+}
+
+.frame-red {
+  border-color: rgba(255, 51, 68, 0.65);
+  box-shadow: 0 4px 16px rgba(255, 51, 68, 0.22);
+}
+
+.frame-cyan {
+  border-color: rgba(0, 229, 255, 0.65);
+  box-shadow: 0 4px 16px rgba(0, 229, 255, 0.22);
+}
+
+.frame-purple {
+  border-color: rgba(192, 132, 252, 0.65);
+  box-shadow: 0 4px 16px rgba(192, 132, 252, 0.22);
 }
 
 .concept-avatar {
-  width: 58px;
-  height: 58px;
-  border-radius: var(--radius-md);
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  border: 2px solid rgba(255, 255, 255, 0.18);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
-  flex-shrink: 0;
+  display: block;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 针对四位主角半身剧照的头像黄金焦点裁切与微距放大 */
+.avatar-focus-zhou {
+  object-position: 49% 18%;
+  transform-origin: 49% 23%;
+  transform: scale(1.38);
+}
+
+.avatar-focus-aming {
+  object-position: 47% 16%;
+  transform-origin: 47% 22%;
+  transform: scale(1.38);
+}
+
+.avatar-focus-anran {
+  object-position: 63% 24%;
+  transform-origin: 63% 28%;
+  transform: scale(1.48);
+}
+
+.avatar-focus-lin {
+  object-position: 60% 26%;
+  transform-origin: 60% 30%;
+  transform: scale(1.42);
+}
+
+.lin-avatar .avatar-focus-lin {
+  object-position: 57% 27%;
+  transform-origin: 57% 27%;
+  transform: scale(1.2);
+}
+
+.concept-card:hover .avatar-focus-zhou,
+.concept-card:hover .avatar-focus-aming {
+  transform: scale(1.46);
+}
+
+.concept-card:hover .avatar-focus-anran {
+  transform: scale(1.56);
+}
+
+.concept-card:hover .avatar-focus-lin {
+  transform: scale(1.5);
 }
 
 .card-glow-purple:hover {
@@ -1016,49 +1090,140 @@ a {
   transition: var(--transition);
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .char-card:hover {
   transform: translateY(-6px);
   border-color: rgba(255, 255, 255, 0.3);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+}
+
+.char-card-zhou {
+  border-top: 2px solid rgba(255, 179, 0, 0.4);
+}
+
+.char-card-anran {
+  border-top: 2px solid rgba(56, 189, 248, 0.4);
+}
+
+.char-card-aming {
+  border-top: 2px solid rgba(255, 51, 68, 0.4);
+}
+
+.char-card-lin {
+  border-top: 2px solid rgba(192, 132, 252, 0.4);
+}
+
+.char-card-zhou:hover {
+  border-color: rgba(255, 179, 0, 0.6);
+  border-top-color: #FFB300;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6), 0 0 28px rgba(255, 179, 0, 0.18);
+}
+
+.char-card-anran:hover {
+  border-color: rgba(56, 189, 248, 0.6);
+  border-top-color: #38BDF8;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6), 0 0 28px rgba(56, 189, 248, 0.18);
+}
+
+.char-card-aming:hover {
+  border-color: rgba(255, 51, 68, 0.6);
+  border-top-color: #FF3344;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6), 0 0 28px rgba(255, 51, 68, 0.2);
+}
+
+.char-card-lin:hover {
+  border-color: rgba(192, 132, 252, 0.6);
+  border-top-color: #C084FC;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6), 0 0 28px rgba(192, 132, 252, 0.2);
 }
 
 .char-img-wrapper {
   position: relative;
-  height: 320px;
+  height: 336px;
   overflow: hidden;
+  background: #090B10;
+}
+
+.char-img-wrapper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(18, 22, 31, 0.96) 0%,
+    rgba(18, 22, 31, 0.32) 28%,
+    rgba(18, 22, 31, 0) 58%
+  );
+  pointer-events: none;
+  z-index: 1;
 }
 
 .char-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top;
-  filter: contrast(1.1) brightness(0.92);
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  object-position: center 22%;
+  filter: contrast(1.04) brightness(1.03) saturate(1.05);
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), filter 0.45s ease;
+}
+
+.char-img-zhou {
+  object-position: 50% 20%;
+}
+
+.char-img-anran {
+  object-position: 60% 24%;
+}
+
+.char-img-aming {
+  object-position: 48% 18%;
+}
+
+.char-img-lin {
+  object-position: 56% 24%;
 }
 
 .char-card:hover .char-img {
-  transform: scale(1.05);
+  transform: scale(1.06);
+  filter: contrast(1.06) brightness(1.08) saturate(1.08);
 }
 
 .char-role-badge {
   position: absolute;
   bottom: 14px;
-  left: 14px;
-  background: rgba(8, 9, 12, 0.85);
+  left: 16px;
+  z-index: 2;
+  background: rgba(8, 10, 15, 0.88);
   backdrop-filter: blur(8px);
-  font-size: 0.75rem;
+  font-size: 0.76rem;
+  font-weight: 600;
   font-family: var(--font-mono);
   color: var(--accent-amber);
-  padding: 4px 10px;
+  padding: 5px 12px;
   border-radius: var(--radius-sm);
-  border: 1px solid rgba(255, 179, 0, 0.3);
+  border: 1px solid rgba(255, 179, 0, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.char-card-anran .char-role-badge {
+  color: #38BDF8;
+  border-color: rgba(56, 189, 248, 0.45);
+}
+
+.char-card-aming .char-role-badge {
+  color: #FF5A69;
+  border-color: rgba(255, 51, 68, 0.45);
+}
+
+.char-card-lin .char-role-badge {
+  color: #C084FC;
+  border-color: rgba(192, 132, 252, 0.45);
 }
 
 .char-info {
-  padding: 24px;
+  padding: 22px 24px 24px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -1071,9 +1236,21 @@ a {
 
 .char-identity {
   font-size: 0.88rem;
-  color: var(--accent-red);
+  color: var(--accent-amber);
   font-weight: 600;
   margin-bottom: 8px;
+}
+
+.char-card-anran .char-identity {
+  color: #38BDF8;
+}
+
+.char-card-aming .char-identity {
+  color: var(--accent-red);
+}
+
+.char-card-lin .char-identity {
+  color: #C084FC;
 }
 
 .char-motto {
@@ -1390,22 +1567,30 @@ a {
   margin-bottom: 14px;
 }
 
-.persp-avatar {
-  width: 54px;
-  height: 54px;
+.persp-avatar-frame {
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  object-fit: cover;
+  overflow: hidden;
   border: 2px solid var(--accent-amber);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.55);
   flex-shrink: 0;
+  background: #0B0E14;
 }
 
-.persp-aming .persp-avatar {
+.persp-aming .persp-avatar-frame {
   border-color: var(--accent-red);
 }
 
-.persp-anran .persp-avatar {
+.persp-anran .persp-avatar-frame {
   border-color: var(--accent-cyan);
+}
+
+.persp-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .persp-head h3 {
@@ -1463,17 +1648,20 @@ a {
 
 .lin-avatar {
   flex-shrink: 0;
-  width: 90px;
-  height: 90px;
+  width: 92px;
+  height: 92px;
   border-radius: 50%;
   overflow: hidden;
-  border: 2px solid var(--accent-amber);
+  border: 2px solid rgba(192, 132, 252, 0.75);
+  box-shadow: 0 6px 20px rgba(192, 132, 252, 0.25);
+  background: #0B0E14;
 }
 
 .lin-avatar img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
 
 .lin-text h4 {
@@ -2038,14 +2226,22 @@ a {
   border-bottom: 1px solid var(--border-light);
 }
 
-.context-char-mini {
-  width: 48px;
-  height: 48px;
+.context-char-frame {
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
-  object-fit: cover;
+  overflow: hidden;
   border: 2px solid var(--accent-amber);
-  box-shadow: 0 0 12px var(--accent-amber-glow);
+  box-shadow: 0 0 14px var(--accent-amber-glow);
   flex-shrink: 0;
+  background: #0B0E14;
+}
+
+.context-char-mini {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .context-role-tag {
