@@ -495,7 +495,7 @@ a {
 
 /* 电影海报印制级字卡与主标题排版 */
 .hero-poster-graphic {
-  max-width: 680px;
+  max-width: 980px;
   padding-top: 8px;
 }
 
@@ -506,6 +506,8 @@ a {
   margin-bottom: 18px;
   padding-left: 14px;
   border-left: 3px solid var(--accent-red);
+  width: max-content;
+  max-width: 100%;
 }
 
 .poster-credit-en {
@@ -515,32 +517,40 @@ a {
   letter-spacing: 3.5px;
   color: #FF4D5D;
   text-transform: uppercase;
+  white-space: nowrap;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.98), 0 0 20px rgba(0, 0, 0, 0.95);
 }
 
 .poster-credit-subrow {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
-  gap: 10px;
-  font-size: 0.92rem;
+  white-space: nowrap;
+  gap: clamp(6px, 0.8vw, 12px);
+  font-size: clamp(0.72rem, 0.95vw, 0.92rem);
   font-weight: 600;
-  letter-spacing: 2px;
+  letter-spacing: clamp(0.5px, 0.12vw, 1.8px);
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.98), 0 0 18px rgba(0, 0, 0, 0.95);
 }
 
 .poster-credit-item {
   color: #F0F3FA;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .poster-credit-sep {
   color: rgba(255, 255, 255, 0.45);
   font-weight: 300;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .poster-credit-company {
   color: var(--accent-red);
   font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
   text-shadow: 0 0 12px rgba(230, 57, 70, 0.45);
 }
 
