@@ -539,8 +539,9 @@ a {
 }
 
 .poster-credit-company {
-  color: #FFD166;
+  color: var(--accent-red);
   font-weight: 700;
+  text-shadow: 0 0 12px rgba(230, 57, 70, 0.45);
 }
 
 .hero-title {
@@ -554,8 +555,11 @@ a {
   font-weight: 900;
   letter-spacing: 6px;
   line-height: 1.05;
-  color: #FFFFFF;
-  text-shadow: 0 4px 28px rgba(0, 0, 0, 0.98), 0 2px 8px rgba(0, 0, 0, 0.98), 0 0 40px rgba(0, 0, 0, 0.85);
+  color: #FFD166;
+  background: linear-gradient(180deg, #FFF8DC 0%, #FFD166 45%, #E5A429 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 4px 24px rgba(0, 0, 0, 0.98)) drop-shadow(0 0 24px rgba(255, 209, 102, 0.4));
 }
 
 .hero-subtitle {
@@ -1223,7 +1227,7 @@ a {
 }
 
 .char-info {
-  padding: 22px 24px 24px;
+  padding: 22px 18px 24px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -1256,8 +1260,12 @@ a {
 .char-motto {
   font-family: var(--font-serif);
   font-style: italic;
-  font-size: 0.86rem;
-  color: #8F95A8;
+  font-size: clamp(0.76rem, 0.84vw, 0.84rem);
+  letter-spacing: -0.2px;
+  color: #FFD166;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   margin-bottom: 16px;
   padding-bottom: 12px;
   border-bottom: 1px solid var(--border-light);
@@ -1306,6 +1314,22 @@ a {
 .sub-char-role {
   font-size: 0.8rem;
   color: #8C92A6;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.sub-char-tag-red {
+  color: #FF4D5E;
+  font-weight: 700;
+  background: rgba(255, 59, 78, 0.12);
+  border: 1px solid rgba(255, 59, 78, 0.35);
+  border-radius: 4px;
+  padding: 1px 6px;
+  display: inline-block;
+  font-size: 0.78rem;
+  letter-spacing: 0.5px;
 }
 
 /* ==========================================================================
@@ -1554,10 +1578,30 @@ a {
 
 .persp-tag {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: #8C92A6;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--accent-red);
   display: block;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 10px rgba(230, 57, 70, 0.4);
+}
+
+#perspectives .section-desc {
+  max-width: 980px;
+  white-space: nowrap;
+}
+
+@media (max-width: 992px) {
+  #perspectives .section-desc {
+    white-space: normal;
+  }
+}
+
+.highlight-red-normal {
+  color: var(--accent-red);
+  font-weight: 700;
+  font-size: inherit;
 }
 
 .persp-head-with-avatar {
@@ -1720,7 +1764,8 @@ a {
 .loop-step p {
   font-size: 0.82rem;
   color: #9EA3B5;
-  line-height: 1.5;
+  line-height: 1.6;
+  text-align: left;
 }
 
 .loop-connector {
@@ -2646,12 +2691,13 @@ a {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
-  padding: 14px 18px;
+  padding: 18px 24px;
   color: #D2D8EB;
-  font-size: 0.9rem;
+  font-size: 1.02rem;
+  font-weight: 600;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   cursor: pointer;
   transition: var(--transition);
 }
@@ -2670,7 +2716,7 @@ a {
 }
 
 .tool-icon {
-  font-size: 1.2rem;
+  font-size: 1.35rem;
 }
 
 .ev-clue-display {
@@ -2694,6 +2740,13 @@ a {
   line-height: 1.7;
   color: #D2D8EB;
   margin-bottom: 16px;
+}
+
+.clue-detail strong {
+  color: #FFD166;
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(255, 209, 102, 0.35);
+  padding: 0 2px;
 }
 
 .clue-conclusion {
