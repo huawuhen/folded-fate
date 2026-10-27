@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Noto+Serif+SC:wght@600;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
   <!-- Styles -->
-  <link rel="stylesheet" href="css/style.css?v=20261027_v5">
+  <link rel="stylesheet" href="css/style.css?v=20261027_v6">
 </head>
 <body class="theme-noir">
   <!-- Background Noise & Ambient Glow -->
@@ -1065,7 +1065,7 @@
             </div>
 
             <div class="ev-buttons-row">
-              <button class="ev-tool-btn active" data-tool="time">
+              <button class="ev-tool-btn" data-tool="time">
                 <span class="tool-icon">⏱️</span>
                 <span>01 比对拍摄时间 / 同步误差</span>
               </button>
@@ -1079,17 +1079,15 @@
               </button>
             </div>
 
-            <div class="ev-clue-display" id="evClueDisplay">
+            <div class="ev-clue-display ev-standby-state" id="evClueDisplay">
               <div class="clue-title-bar">
                 <span class="clue-status-icon">🔍</span>
-                <strong id="evClueTitle">比对拍摄时间与网络时钟同步</strong>
+                <strong id="evClueTitle">待查证：请选择上方任意侦查手段</strong>
               </div>
               <p id="evClueContent" class="clue-detail">
-                经司法技术复核：小区监控 A 采用独立局域网，与国家授时中心毫秒级时间同步无误；而案发现场附近的监控 B 录像服务器被植入了 NTP 时间欺骗插件，<strong>其系统时钟比真实时间慢了整整 47 分钟</strong>！有人在案发前刻意篡改了录像元数据！
+                点击上方【01 时间同步】、【02 原始数据链】或【03 走访证人】，执行时空矛盾交叉复核，揭开案发当夜的伪造不在场证明。
               </p>
-              <div class="clue-conclusion" id="evClueConclusion">
-                <strong>破案结论：</strong>周放当晚确实在回家路上，后巷录像实际为案发后 47 分钟替身伪造栽赃！
-              </div>
+              <div class="clue-conclusion" id="evClueConclusion" style="display: none;"></div>
             </div>
           </div>
         </div>

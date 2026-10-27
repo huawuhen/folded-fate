@@ -299,6 +299,7 @@ function initPrototypeSimulator() {
    ========================================================================== */
 function initEvidenceLab() {
   const toolButtons = document.querySelectorAll('.ev-tool-btn');
+  const evClueDisplay = document.getElementById('evClueDisplay');
   const clueTitle = document.getElementById('evClueTitle');
   const clueContent = document.getElementById('evClueContent');
   const clueConclusion = document.getElementById('evClueConclusion');
@@ -307,17 +308,17 @@ function initEvidenceLab() {
     time: {
       title: "比对拍摄时间与网络时钟同步",
       content: "经司法技术复核：小区监控 A 采用独立局域网，与国家授时中心毫秒级时间同步无误；而案发现场附近的监控 B 录像服务器被植入了 NTP 时间欺骗插件，<strong>其系统时钟比真实时间慢了整整 47 分钟</strong>！有人在案发前刻意篡改了录像元数据！",
-      conclusion: "破案结论：周放当晚确实在回家的车程中，后巷录像实际为案发后 47 分钟由替身演戏伪造栽赃！"
+      conclusion: "周放当晚确实在回家的车程中，后巷录像实际为案发后 47 分钟由替身演戏伪造栽赃！"
     },
     data: {
       title: "查看原始文件 EXIF 与数据链流转",
       content: "调取监控 B 导出的 MP4 封装包，分析其十六进制文件头。发现该视频并非流式编码直接落盘，而是<strong>由两段不同焦段的监控素材在案发当晚 23:15 进行过跳帧剪辑</strong>，音频轨道缺失了酒吧街特有的雨滴声低频环境音。",
-      conclusion: "证据瑕疵：监控 B 文件存在二次剪辑伪造痕迹，无法作为直接定罪证据！"
+      conclusion: "监控 B 文件存在二次剪辑伪造痕迹，无法作为直接定罪证据！"
     },
     witness: {
       title: "走访证人与比对真实物理视线",
       content: "寻访当夜后巷目击的环卫工与便利店店员。证人表示当晚走过的人<strong>身高约 178cm、体态微躬且左肩有轻微跛行</strong>，而周放身高 184cm，无任何步态缺陷。当晚实际行经后巷的人，身型与阿溟高度相符。",
-      conclusion: "人物关系逆转：被录入监控的并非周放，而是被胁迫前去刺杀安冉的阿溟！"
+      conclusion: "被录入监控的并非周放，而是被胁迫前去刺杀安冉的阿溟！"
     }
   };
 
@@ -328,6 +329,13 @@ function initEvidenceLab() {
 
       toolButtons.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
+
+      if (evClueDisplay) {
+        evClueDisplay.classList.remove('ev-standby-state');
+      }
+      if (clueConclusion) {
+        clueConclusion.style.display = 'block';
+      }
 
       clueTitle.textContent = data.title;
       clueContent.innerHTML = data.content;
