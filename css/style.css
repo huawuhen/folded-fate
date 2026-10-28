@@ -144,7 +144,7 @@ a {
 
 .section-floating-bg-wrapper {
   position: absolute;
-  inset: -30px;
+  inset: 0;
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
@@ -155,7 +155,7 @@ a {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  opacity: 0.9;
+  opacity: 0.88;
   filter: none;
   will-change: transform;
 }
@@ -173,21 +173,21 @@ a {
 }
 
 @keyframes floatingBgMove1 {
-  0% { transform: scale(1.18) translate(0, 0); }
-  50% { transform: scale(1.22) translate(-1.5%, -1%); }
-  100% { transform: scale(1.19) translate(1.2%, 0.8%); }
+  0% { transform: scale(1.02) translate(0, 0); }
+  50% { transform: scale(1.05) translate(-1%, -0.8%); }
+  100% { transform: scale(1.03) translate(0.8%, 0.6%); }
 }
 
 @keyframes floatingBgMove2 {
-  0% { transform: scale(1.18) translate(0, 0); }
-  50% { transform: scale(1.22) translate(1.2%, -1.2%); }
-  100% { transform: scale(1.17) translate(-1%, 0.6%); }
+  0% { transform: scale(1.03) translate(0, 0); }
+  50% { transform: scale(1.06) translate(0.8%, -0.8%); }
+  100% { transform: scale(1.02) translate(-0.8%, 0.5%); }
 }
 
 @keyframes floatingBgMove3 {
-  0% { transform: scale(1.17) translate(0, 0); }
-  50% { transform: scale(1.21) translate(-1%, 1%); }
-  100% { transform: scale(1.19) translate(1.5%, -0.8%); }
+  0% { transform: scale(1.02) translate(0, 0); }
+  50% { transform: scale(1.05) translate(-0.8%, 0.8%); }
+  100% { transform: scale(1.04) translate(1%, -0.6%); }
 }
 
 .section-floating-bg-overlay {
@@ -452,30 +452,37 @@ a {
 /* ==========================================================================
    Hero Section (电影海报融合排版 · 无遮罩全亮呈现)
    ========================================================================== */
-.hero-section {
+.section.hero-section {
+  position: relative;
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: stretch;
-  padding: 104px 0 44px;
-  position: relative;
+  padding: clamp(96px, 11vh, 128px) 0 clamp(32px, 4vh, 44px);
   overflow: hidden;
 }
 
 .hero-bg-wrapper {
   position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
   z-index: 0;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero-bg-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 28%;
+  object-position: center 25%;
   filter: none;
   opacity: 1;
   transform: none;
+  transition: object-position 0.3s ease;
 }
 
 .hero-vignette {
@@ -491,6 +498,7 @@ a {
   flex-direction: column;
   justify-content: space-between;
   min-height: calc(100vh - 148px);
+  min-height: calc(100dvh - 148px);
 }
 
 /* 电影海报印制级字卡与主标题排版 */
@@ -1091,7 +1099,7 @@ a {
    ========================================================================== */
 .characters-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 24px;
   margin-bottom: 36px;
 }
@@ -1155,7 +1163,8 @@ a {
 
 .char-img-wrapper {
   position: relative;
-  height: 336px;
+  width: 100%;
+  aspect-ratio: 3 / 4;
   overflow: hidden;
   background: #090B10;
 }
@@ -1178,25 +1187,25 @@ a {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 22%;
+  object-position: center 18%;
   filter: contrast(1.04) brightness(1.03) saturate(1.05);
   transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), filter 0.45s ease;
 }
 
 .char-img-zhou {
-  object-position: 50% 20%;
+  object-position: 50% 16%;
 }
 
 .char-img-anran {
-  object-position: 60% 24%;
+  object-position: 60% 18%;
 }
 
 .char-img-aming {
-  object-position: 48% 18%;
+  object-position: 48% 14%;
 }
 
 .char-img-lin {
-  object-position: 56% 24%;
+  object-position: 56% 18%;
 }
 
 .char-card:hover .char-img {
@@ -2555,7 +2564,9 @@ a {
 }
 
 .feed-screen {
-  height: 280px;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  max-height: 280px;
   background: #040608;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--radius-md);
@@ -2918,7 +2929,7 @@ a {
    ========================================================================== */
 .benchmarks-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
   margin-bottom: 40px;
 }
@@ -2941,13 +2952,14 @@ a {
 
 .bm-poster-wrapper {
   position: relative;
-  height: 380px;
+  width: 100%;
+  aspect-ratio: 3 / 4;
   overflow: hidden;
   background: radial-gradient(circle at 50% 35%, rgba(24, 30, 44, 0.8) 0%, rgba(9, 11, 16, 0.98) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px 16px;
+  padding: clamp(12px, 1.8vw, 20px) clamp(10px, 1.5vw, 16px);
   border-bottom: 1px solid var(--border-light);
 }
 
@@ -3114,7 +3126,7 @@ a {
    ========================================================================== */
 .visuals-trio-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
   margin-bottom: 48px;
 }
@@ -3133,7 +3145,8 @@ a {
 }
 
 .vis-img-wrapper {
-  height: 220px;
+  width: 100%;
+  aspect-ratio: 16 / 10;
   overflow: hidden;
 }
 
@@ -3583,9 +3596,64 @@ body.deck-mode-active .section {
 }
 
 /* ==========================================================================
-   Responsive & Print Media Queries
+   Responsive & Print Media Queries (确保浏览器窗口缩小时，海报与所有图片等比自适应缩小)
    ========================================================================== */
+@media (max-width: 1200px) {
+  .hero-specs-grid {
+    gap: 12px;
+  }
+  .characters-grid {
+    gap: 18px;
+  }
+  .benchmarks-grid {
+    gap: 18px;
+  }
+  .visuals-trio-grid {
+    gap: 18px;
+  }
+}
+
 @media (max-width: 992px) {
+  .section.hero-section {
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: clamp(96px, 12vh, 128px) 0 48px;
+  }
+  .hero-content {
+    min-height: auto;
+    gap: 32px;
+  }
+  .hero-bg-img {
+    object-position: center 20%;
+  }
+  .hero-specs-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .characters-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .char-img-wrapper {
+    aspect-ratio: 3 / 3.8;
+  }
+  .benchmarks-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .visuals-trio-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
   .concept-grid {
     grid-template-columns: 1fr;
   }
@@ -3599,16 +3667,19 @@ body.deck-mode-active .section {
   .proto-scene-media {
     border-right: none;
     border-bottom: 1px solid var(--border-light);
-    max-width: 500px;
+    max-width: 480px;
     margin: 0 auto;
   }
   .proto-telemetry-dashboard {
-    max-width: 500px;
+    max-width: 480px;
     margin: 0 auto;
     width: 100%;
   }
   .ev-compare-grid {
     grid-template-columns: 1fr;
+  }
+  .feed-screen {
+    aspect-ratio: 16 / 10;
   }
   .nav-links {
     display: none;
@@ -3630,6 +3701,32 @@ body.deck-mode-active .section {
 }
 
 @media (max-width: 768px) {
+  .hero-specs-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .characters-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    max-width: 380px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .char-img-wrapper {
+    aspect-ratio: 3 / 3.8;
+  }
+  .benchmarks-grid {
+    grid-template-columns: 1fr;
+    max-width: 380px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .visuals-trio-grid {
+    grid-template-columns: 1fr;
+    max-width: 440px;
+    margin-left: auto;
+    margin-right: auto;
+  }
   .pf-arrow {
     display: none;
   }
@@ -3640,10 +3737,33 @@ body.deck-mode-active .section {
     padding: 36px 24px;
   }
   .section {
-    padding: 60px 0;
+    padding: 56px 0;
+  }
+  .section.hero-section {
+    padding-top: clamp(100px, 14vh, 136px);
+    padding-bottom: 48px;
   }
   .btn-lg {
     width: 100%;
+  }
+}
+
+@media (max-width: 520px) {
+  .hero-specs-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .hero-poster-graphic .poster-main-title {
+    font-size: clamp(2.2rem, 11vw, 3.2rem);
+  }
+  .characters-grid {
+    max-width: 320px;
+  }
+  .benchmarks-grid {
+    max-width: 320px;
+  }
+  .visuals-trio-grid {
+    max-width: 320px;
   }
 }
 
